@@ -1,0 +1,255 @@
+<?php
+include "service/database.php";
+session_start();
+
+$message = "";
+$result = null;
+
+// Cek apakah admin sudah diverifikasi
+if (!isset($_SESSION["is-verify"]) || $_SESSION["is-verify"] !== true) {
+  header("Location: verifikasi-admin.php");
+  exit();
+}
+
+// Tambah event
+if (isset($_POST['tambahEvent'])) {
+  $namaEvent = $_POST['eventName'] ?? '';
+  $deskripsi = $_POST['description'] ?? '';
+  $time = $_POST['time'] ?? '';
+
+  if (!empty($namaEvent) && !empty($deskripsi) && !empty($time)) {
+    $stmt = $db->prepare("INSERT INTO event (nama, tanggal, Deskripsi) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $namaEvent, $time, $deskripsi);
+    if ($stmt->execute()) {
+      $_SESSION["message"] = "Event berhasil ditambahkan!";
+      header("Location: admin.php");
+      exit();
+    } else {
+      $message = "Gagal menambah event";
+    }
+  } else {
+    $message = "Data tidak boleh kosong";
+  }
+}
+
+// Update event
+if (isset($_POST['updateEvent'])) {
+  $id = intval($_POST['id'] ?? 0);
+  $namaEvent = $_POST['eventName'] ?? '';
+  $deskripsi = $_POST['description'] ?? '';
+  $time = $_POST['time'] ?? '';
+
+  if (!empty($namaEvent) && !empty($deskripsi) && !empty($time)) {
+    $stmt = $db->prepare("UPDATE event SET nama = ?, tanggal = ?, Deskripsi = ? WHERE id = ?");
+    $stmt->bind_param("sssi", $namaEvent, $time, $deskripsi, $id);
+    if ($stmt->execute()) {
+      $_SESSION["message"] = "Event berhasil diperbarui!";
+      header("Location: admin.php");
+      exit();
+    } else {
+      $message = "Gagal memperbarui event";
+    }
+  } else {
+    $message = "Data tidak boleh kosong";
+  }
+}
+
+// Hapus event
+if (isset($_GET['hapus'])) {
+  $hapusId = intval($_GET['hapus']);
+  $query = "DELETE FROM event WHERE id = $hapusId";
+  if ($db->query($query)) {
+    $_SESSION["message"] = "Event berhasil dihapus!";
+    header("Location: admin.php");
+    exit();
+  } else {
+    $message = "Gagal menghapus event";
+  }
+}
+
+// Simpan keuangan
+if (isset($_POST["saveFinace"])) {
+  $pemasukan = is_numeric($_POST['incval']) ? (float)$_POST['incval'] : 0;
+  $pengeluaran = is_numeric($_POST['expval']) ? (float)$_POST['expval'] : 0;
+
+  $result = $db->query("SELECT * FROM keuangan ORDER BY id DESC LIMIT 1");
+  $dana_sebelumnya = ($result && $result->num_rows > 0) ? $result->fetch_assoc()['dana'] : 0;
+  $dana = $dana_sebelumnya + ($pemasukan - $pengeluaran);
+
+  if ($pemasukan != "" || $pengeluaran != "") {
+    $stmt = $db->prepare("INSERT INTO keuangan (pemasukan, pengeluaran, dana) VALUES (?, ?, ?)");
+    $stmt->bind_param("ddd", $pemasukan, $pengeluaran, $dana);
+    if ($stmt->execute()) {
+      $_SESSION["message"] = "Data keuangan berhasil disimpan!";
+      header("Location: admin.php");
+      exit();
+    } else {
+      $message = "Gagal menyimpan data keuangan";
+    }
+  } else {
+    $message = "Data pemasukan/pengeluaran tidak boleh kosong";
+  }
+}
+
+// Logout admin
+if (isset($_POST["keluar"])) {
+  $_SESSION["is-verify"] = false;
+  header("Location: index.php");
+  exit();
+}
+
+// Ambil data event
+$result = $db->query("SELECT * FROM event");
+
+// Mode edit event
+$editMode = false;
+$eventToEdit = ['id' => '', 'nama' => '', 'tanggal' => '', 'Deskripsi' => ''];
+
+if (isset($_GET['edit'])) {
+  $editId = intval($_GET['edit']);
+  $editResult = $db->query("SELECT * FROM event WHERE id = $editId");
+  if ($editResult && $editResult->num_rows > 0) {
+    $eventToEdit = $editResult->fetch_assoc();
+    $editMode = true;
+  }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<?php
+if (isset($_SESSION["message"])) {
+  echo "<script>alert('" . $_SESSION["message"] . "');</script>";
+  unset($_SESSION["message"]);
+}
+?>
+<body>
+  <header>
+    <?php include "./component/nav.php" ?>
+  </header>
+
+  <main>
+    <div class="title">
+      <h1 class="main-tittle">Edit</h1>
+      <p>Jangan lupa save agar tersimpan</p>
+      <form action="admin.php" method="post" style="display:inline;">
+        <button type="submit" name="keluar" class="logout-button">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="finace">
+        <h3>Keuangan:</h3>
+        <form action="admin.php" method="post">
+          <div class="expenditure-income">
+            <div class="income">
+              <h3>Pemasukan</h3>
+              <input type="number" id="incval" name="incval" placeholder="0.000" value="0" required autocomplete="off">
+            </div>
+            <div class="expenditure">
+              <h3>Pengeluaran</h3>
+              <input type="number" id="expval" name="expval" placeholder="0.000" value="0" required autocomplete="off">
+            </div>
+            <div class="button-container">
+              <button type="submit" name="saveFinace" class="save">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+            </div>  
+          </div>
+        </form>
+      </div>
+      <div class="clock">
+        <div class="clock-wraper">
+          <h1 id="clock"></h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="event">
+      <h3>Event</h3>
+      <button class="tambah-event" onclick="bukaPopup()">+</button>
+      <?php
+      if ($result && $result->num_rows > 0) {
+        echo "<table border='1'>";
+        echo "<tr>
+                <th>No</th>
+                <th>Nama Event</th>
+                <th>Tanggal</th>
+                <th>Deskripsi</th>
+                <th>Aksi</th>
+              </tr>";
+        $no = 1;
+        while ($row = $result->fetch_assoc()) {
+          echo "<tr>
+                  <td>" . $no++ . "</td>
+                  <td>" . htmlspecialchars($row['nama']) . "</td>
+                  <td>" . htmlspecialchars($row['tanggal']) . "</td>
+                  <td>" . htmlspecialchars($row['Deskripsi']) . "</td>
+                  <td>
+                    <a href='admin.php?edit=" . $row["id"] . "'>
+                      <i class='fa-solid fa-pen-to-square' style='color: white; margin: 5px;'></i>
+                    </a>
+                    <a href='admin.php?hapus=" . $row["id"] . "' onclick=\"return confirm('Yakin hapus event ini?')\">
+                      <i class='fa-solid fa-trash' style='color: red; margin: 5px;'></i>
+                    </a>
+                  </td>
+                </tr>";
+        }
+        echo "</table>";
+      } else {
+        echo "<p>Tidak ada event.</p>";
+      }
+      ?>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="tutupPopup()"></div>
+
+    <div class="pop-up" id="popup">
+      <form action="admin.php" method="post">
+        <input type="hidden" name="id" value="<?php echo htmlspecialchars($eventToEdit['id']); ?>">
+        <h3 style="text-align: center;"><?php echo $editMode ? "Edit Event" : "Tambah Event"; ?></h3>
+
+        <div class="input-field">
+          <label for="eventName" style="width: 30%;">Nama:</label>
+          <input type="text" id="eventName" name="eventName" required
+                 value="<?php echo htmlspecialchars($eventToEdit['nama']); ?>">
+        </div>
+
+        <div class="input-field">
+          <label for="time" style="width: 30%;">Waktu:</label>
+          <input type="datetime-local" name="time" id="time" required
+                 value="<?php echo $eventToEdit['tanggal'] ? date('Y-m-d\TH:i', strtotime($eventToEdit['tanggal'])) : ''; ?>">
+        </div>
+
+        <div class="input-field">
+          <label for="description" style="width: 30%;">Deskripsi:</label>
+          <textarea name="description" id="description"><?php echo htmlspecialchars($eventToEdit['Deskripsi']); ?></textarea>
+        </div>
+
+        <div class="popup-buttons">
+          <button type="button" onclick="tutupPopup()" id="tutup">Tutup</button>
+          <button type="submit" name="<?php echo $editMode ? "updateEvent" : "tambahEvent"; ?>" id="buka">
+            <?php echo $editMode ? "Update" : "Tambah"; ?>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <i><?php echo $message; ?></i>
+  </main>
+
+  <script src="js/admin.js"></script>
+  <script src="js/clock.js"></script>
+</body>
+</html>

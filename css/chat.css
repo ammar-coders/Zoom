@@ -1,0 +1,182 @@
+html, body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+
+#chat-box {
+  margin: 0px;
+  border: none;
+  height: 100vh;
+  padding: 15px;
+  background-image: url("/zoom//assets/chat_bg.png"); 
+  font-family: "Segoe UI", sans-serif;
+  overflow-y: hidden;
+  box-sizing: border-box;
+}
+
+#copyright {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+
+.bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  position: relative;
+  clear: both;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  word-wrap: break-word;
+}
+
+.bubble:nth-child(2) {
+  margin-top: 100px;
+}
+
+.bubble:last-child { margin-bottom: 75px; } 
+
+.bubble.client {
+  background-color: #144d37;
+  float: left;
+  border-top-left-radius: 0;
+  padding-right: 20px;
+}
+
+.bubble.admin {
+  background-color: #242626;
+  float: right;
+  border-top-right-radius: 0;
+  padding-left: 20px;
+}
+
+.bubble .msg {
+  font-size: 14.2px;
+  color: #eee;
+  margin-bottom: 4px;
+}
+
+.bubble .time {
+  font-size: 0.75em;
+  color: #aaa;
+  text-align: right;
+}
+
+.bubble strong {
+  font-size: 12.8px;
+  color: white;
+}
+
+/* Scrollbar styling */
+#chat-box::-webkit-scrollbar {
+  width: 6px;
+}
+#chat-box::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+form#chat-form,
+form#admin-chat-form {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: transparent;
+  font-family: "Segoe UI", sans-serif;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+form#chat-form input[type="text"],
+form#admin-chat-form input[type="text"] {
+  color: white;
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  font-size: 15px;
+  margin-right: 10px;
+  background-color: #242626;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+form#chat-form button,
+form#admin-chat-form button {
+  background-color: #128c7e; /* WhatsApp green */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 15px;
+}
+
+form#chat-form button:hover,
+form#admin-chat-form button:hover {
+  background-color: #075e54;
+}
+
+/* Ratakan elemen heading dan link di atas */
+h2, h3 {
+  text-align: center;
+  margin: 10px 0;
+  font-family: "Segoe UI", sans-serif;
+  color: #075e54;
+}
+
+/* Tautan kembali / daftar client */
+a {
+  display: block;
+  text-align: center;
+  margin: 10px auto;
+  font-family: "Segoe UI", sans-serif;
+  color: #128c7e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.header-bar {
+  z-index: 1000;
+  padding: 20px;
+  position: fixed;
+  background-color: #161717;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;   /* atau space-between / space-around */
+  align-items: center;
+  gap: 20px; /* jarak antar elemen */
+  margin-bottom: 15px;
+  flex-wrap: wrap; /* biar responsif kalau layarnya kecil */
+}
+
+.header-bar h2,
+.header-bar h3,
+.header-bar a {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  color: #075e54;
+  text-decoration: none;
+}
+
+.header-bar a {
+  font-weight: bold;
+  color: #128c7e;
+}

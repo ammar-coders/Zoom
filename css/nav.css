@@ -1,0 +1,231 @@
+nav {
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(68, 68, 68);
+    position: fixed;
+    top: 0px;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+}
+
+.icon-wrapper {
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.icon-wrapper i {
+    font-size: 20px;
+    color: white;
+}
+
+.whatsapp-icon {
+    background-color: #25D366;
+}
+.whatsapp-icon:hover {
+    background-image: linear-gradient(to top left, #25D366, #1cac51);
+}
+
+.youtube-icon {
+    background-color: #ff0034;
+}
+.youtube-icon:hover {
+    background-image: linear-gradient(to top left, #ff0034, #cc0028);
+}
+
+.email-icon {
+    background-color: #0072c6;
+}
+.email-icon:hover {
+    background-image: linear-gradient(to top left, #0072c6, #3399ff);
+}
+
+
+
+
+
+.link-parent {
+    width: 100%;
+    margin-right: 10px;              /* Pastikan penuh */
+    display: flex;
+    justify-content: flex-end; /* dorong isi ke kanan */
+    margin-left: 10px;        /* opsional, jarak dari kiri */
+}
+
+.nav-link {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-weight: 500;
+    font-size: 17px;
+    color: white;
+    text-decoration: none;
+    position: relative;
+    top: 26%;
+    width: max-content;
+}
+
+.nav-link::after {
+    content: '';
+    width: 0%;
+    height: 10px;
+    background-color: #0072c6;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 500ms;
+}
+
+.nav-link::before {
+    content: '';
+    width: 0%;
+    height: 80%;
+    background-color: hsla(205, 100%, 39%, 0.5);
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all 500ms;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover:first-child::after {
+    width: 100%;
+    border-bottom-left-radius: 1000px;
+}
+
+.nav-link:hover:last-child::after {
+    width: 100%;
+    border-bottom-right-radius: 1000px;
+}
+
+.nav-link:first-child:hover::before {
+    width: 100%;
+    border-top-left-radius: 10px;
+}
+
+.nav-link:hover::before {
+    width: 100%;
+}
+
+.nav-link:last-child:hover:before {
+    width: 100%;
+    border-top-right-radius: 10px;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    color: white;
+    font-size: 50px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+.ham-link-parent {
+    padding: 10px;
+    display: none;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 67px;
+    right: 1px;
+    width: 0px;
+    height: 0px;
+    background-color: #ddd;
+    border-bottom-left-radius: 10px;
+    text-align: center;
+    padding: 0px;
+    transition: all 500ms;
+    overflow: hidden;
+}
+
+.hamburger:hover .ham-link-parent {
+    display: flex;
+    height: 108px;
+    width: 90px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ham-link {
+    width: 100%;
+    display: none;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    transition: all 500ms;
+    position: relative;
+    text-align: center;
+}
+
+.ham-link::before {
+    content: '';
+    width: 0%;
+    height: 3px;
+    background-color: #0072c6;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 500ms;
+}
+
+.ham-link::after {
+    content: '';
+    padding: 0px;
+    width: 0%;
+    height: 80%;
+    background-color: hsla(205, 100%, 39%, 0.5);
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 500ms;
+}
+
+.hamburger:hover .ham-link {
+    display: block;
+}
+
+.ham-link:hover::before {
+    width: 100%;
+}
+
+.ham-link:last-child:hover::before{
+    width: 100%;
+    border-bottom-left-radius: 10px;
+}
+
+.ham-link:hover::after {
+    width: 96%;
+    padding: 2px;
+}
+
+@media only screen and (max-width: 500px) {
+    .hamburger {
+        display: block;
+    }
+    .link-parent {
+        display: none;
+    }
+}

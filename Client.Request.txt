@@ -1,0 +1,14 @@
+div class = anim
+    div class = slides href css
+        img src = test.png
+
+    <div class="expenditure-income">
+      <div class="income">
+        <h2 class="income-tittle">Pemasukan</h2>
+        <p class="money">Rp 0.000,--</p>
+      </div>
+      <div class="expenditure">
+        <h2 class="expenditure-tittle">Pengeluaran</h2>
+        <p class="money">Rp 0.000,--</p>
+      </div>
+    </div>

@@ -1,0 +1,108 @@
+<?php
+include "controler/display.controler.php";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display</title>
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/display.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+
+  <main>
+    <div class="top">
+      <h2>Mushalla Al-Mauizhah</h2>
+    </div>
+    <div class="left-bar">
+      <div class="clock-wraper">
+        <h1 id="clock"></h1>
+      </div>
+      <div class="waktu-shalat-wraper">
+        <div class="waktu-shalat">
+          <p>SHUBUH</p>
+          <p class="shubuh"></p>
+        </div>
+        <div class="waktu-shalat">
+          <p>SYURUQ</p>
+          <p class="syuruq"></p>
+        </div>
+        <div class="waktu-shalat">
+          <p>DZHUHUR</p>
+          <p class="dzhuhur"></p>
+        </div>
+        <div class="waktu-shalat">
+          <p>ASHAR</p>
+          <p class="ashar"></p>
+        </div>
+        <div class="waktu-shalat">
+          <p>MAGRIB</p>
+          <p class="magrib"></p>
+        </div>
+        <div class="waktu-shalat">
+          <p>ISYA</p>
+          <p class="isya"></p>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <iframe
+        id="liveVideo"
+        src="https://www.youtube.com/embed/mvvwu8iAD8k?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&fs=0&playsinline=1"
+        frameborder="0"
+        allow="autoplay; encrypted-media; fullscreen"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <div class="right-bar">
+      <div class="frame finance">
+        <h3 style="text-align: center;">Informasi keuangan hari ini</h3>
+        <div class="income">
+          <h3 style="font-size: 18px;">Pemasukan</h3>
+          <p class="money" id="inc"><?= $pemasukanResult ?></p>
+        </div>
+        <div class="expenditure">
+          <h3 style="font-size: 18px;">Pengeluaran</h3>
+          <p class="money" id="expd"><?= $pengeluaranResult ?></p>
+        </div>
+        <div class="total">
+          <h3 style="font-size: 18px;">Total</h3>
+          <p class="money" id="total"><?= $danaResult ?></p>
+        </div>
+      </div>
+      <div class="frame event">
+        <h3 style="text-align: center;" >Event mendatang</h3>
+        <?php
+        $result = $db->query("SELECT * FROM event");
+        include "template/php/eventtable.display.php";
+        ?>
+        <?= $eventHtml ?>
+      </div>
+      
+
+    </div>
+    <div class="bottom">
+      <div class="marquee-container">
+        <div class="slide">
+          "Suasana yang tenang mendukung hati yang khusyuk. Mohon jamaah semua mematikan suara ponsel dan menjaga ketertiban di dalam musholla"
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <?php include "component/footer.php" ?>
+  </footer>
+
+  <script src="js/admin.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/jadwal-shalat.js"></script>
+  <script src="js/display.js"></script>
+</body>
+</html>
+

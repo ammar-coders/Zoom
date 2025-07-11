@@ -1,0 +1,42 @@
+<?php
+  include "controler/verifikasi-admin.controler.php";
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verifikasi admin</title>
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/verifikasi-admin.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+  <!-- ✅ Only one form tag -->
+  <form class="form" action="verifikasi-admin.php" method="post">
+    <div class="i">
+      <i class="bx bxs-check-shield"></i>
+    </div>
+    <h1>Verifikasi bahwa anda admin</h1>
+
+    <div class="username-password">
+      <div class="username">
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username" required>
+      </div>
+      <div class="password">
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password" required>
+      </div>
+    </div>
+
+    <div class="verifikasi-parent">
+      <button type="submit" class="verifikasi" name="verifikasi">verifikasi</button>
+    </div>
+  </form>
+
+  <script src="js/verifikasi-admin.js"></script>
+</body>
+</html>

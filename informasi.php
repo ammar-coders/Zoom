@@ -1,0 +1,72 @@
+<?php
+  include "controler/informasi.controler.php"
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Informasi</title>
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/public.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+  <header>
+    <?php include "./component/nav.php" ?>
+  </header>
+
+  <main>
+    <h1 class="main-tittle">Mushalla Al-Mauizah</h1>
+    <div class="jam">
+      <p id="clock"></p>
+    </div>
+
+    <div class="divider">
+      <h2 class="text">Informasi Mushalla Al Mauizah</h2>
+    </div>
+
+    <div class="expenditure-income-total">  
+      <h2>Keuangan:</h2>
+      <div class="content-wraper">
+        <div class="income content">
+          <h3>Pemasukan</h3>
+          <h3 class="money" id="inc"><?= $pemasukanResult ?></h3>
+        </div>
+        <div class="expenditure content ">
+          <h3>Pengeluaran</h3>
+          <h3 class="money" id="expd"><?= $pengeluaranResult ?></h3>
+        </div>
+        <div class="total content">
+          <h3>Dana</h3>
+          <h3 class="money" id="total"><?= $danaResult ?></h3>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="event-parent">
+      <h2>Event:</h2>
+      <div class="content-wraper">
+        <div class="event event1 content">
+          <?php include "template/php/eventtable.informasi.php"; ?>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <?php include "component/footer.php" ?>
+  </footer>
+
+  <script src="js/clock.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

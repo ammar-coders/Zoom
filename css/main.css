@@ -1,0 +1,205 @@
+main {
+  width: 100%;
+  height: 100%;
+  margin-top: 75px;
+}
+
+.main-tittle {
+  text-align: center;
+}
+.img-wrapper {
+  width: 80%;
+  aspect-ratio: 2 / 1; /* Rasio 2:1 */
+  margin: 10px auto;
+  border: 5px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  scrollbar-color: rgba(0,0,0,0.5) transparent;
+  scrollbar-width: thin;
+}
+
+.img {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scroll-snap-align: start;
+}
+
+/* Optional: Hilangkan border kanan untuk gambar terakhir */
+.img:last-child {
+  border-right: none;
+}
+
+/* Scrollbar untuk Webkit */
+.img-wrapper::-webkit-scrollbar {
+  height: 6px;
+  background: transparent;
+}
+.img-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+.img-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Default: Lebih dari 500px, semua sejajar */
+.content-wraper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+}
+
+.content-tittle {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: solid 1px black;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  transition: all 500ms ease;
+  background-color: #f1f5f9; 
+}
+
+.event {
+  background-color: lightgreen;
+}
+
+.divider {
+  margin: 20px ;
+  text-align: center ;
+  position: relative;
+}
+
+.divider::before {
+  content: '';
+  flex: 1;
+  width: 100%;
+  height: 5px;
+  background-color: black;
+  position: absolute;
+  top: -21px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+
+.divider::after {
+  flex: 1;
+  content: '';
+  width: 100%;
+  height: 5px;
+  background-color: black;
+  position: absolute;
+  bottom: -23px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+
+.tentang {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.maps-icon {
+  color: #ff0034;
+}
+
+.maps-icon {
+  font-size: 40px;
+  text-decoration: none;
+}
+
+#clock {
+  text-align: center;
+  font-weight: 500;
+  font-size: 40px;
+}
+
+/* Jika layar lebih kecil atau sama dengan 520px */
+@media (max-width: 520px) {
+  .expenditure-income {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .income,
+  .expenditure {
+    width: 48%; /* masing-masing setengah kurang sedikit */
+    margin-bottom: 10px;
+  }
+
+  .total {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* Jika sangat kecil (misal HP super kecil), semuanya satu kolom */
+@media (max-width: 340px) {
+  .expenditure-income {
+    flex-direction: column;
+  }
+
+  .income,
+  .expenditure,
+  .total {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+table {
+    border: none;
+    border-collapse: separate;  /* Important for border-radius */
+    border-spacing: 0;          /* Removes space between cells */
+    width: 100%;
+    border-radius: 10px;        /* Apply radius to entire table */
+    overflow: hidden;           /* Ensures corners clip correctly */
+}
+
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: none;               /* Ensure no cell borders */
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Optional: extra-rounded effect on specific cells */
+th:first-child {
+    border-top-left-radius: 10px;
+}
+
+th:last-child {
+    border-top-right-radius: 10px;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}

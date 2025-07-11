@@ -1,0 +1,396 @@
+main {
+    margin-top: 60px;
+}
+
+.title {
+    text-align: center;
+    gap: 0px;
+}
+
+.card {
+  min-width: 140px;          /* lebar minimal */
+  width: calc(100% - 100px);        /* otomatis sesuai konten jika lebih besar */
+  max-width: 100%;           /* biar gak overflow layar */
+  margin: 50px;
+  padding: 10px;
+  height: max-content;
+  background: #dddddd;
+  border-radius: 20px;   
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.save {
+    position: relative;
+    top: -37px;
+    left: calc(100% - 30px);
+
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+
+    font-size: 20px;
+    font-weight: 900;
+    color: white;
+    background-color: #0000ff;
+
+    border: none;
+    border-radius: 1000px; /* Lebih tepat untuk tombol bulat */
+    cursor: pointer;
+
+    overflow: hidden;
+    transition: width 0.5s ease;
+}
+
+.save:hover {
+    background-color: #000099;
+}
+
+
+
+
+
+input[type="number"] {
+    border-radius: 1000px;
+    border: 0px;
+    padding: 5px 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.finace{  
+    flex: 3;
+    margin: 50px;
+    padding: 10px;
+    width: max-content;
+    height: max-content;
+    background: #dddddd;
+    border-radius: 20px;
+}
+
+.expenditure-income {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.income {
+    padding: 5px;
+    flex: 1;
+    background-color: #25d366;
+    border-radius: 10px;
+    border: solid 1px black;
+}
+
+.expenditure {
+    padding: 5px;
+    flex: 1;
+    background-color: #ff0034;
+    border-radius: 10px;    
+    border: solid 1px black;
+}
+
+.clock {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock-wraper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#clock {
+    margin: 0px;
+    font-size: 80px;
+}
+
+
+
+
+
+
+.event {
+  min-width: 140px;          /* lebar minimal */
+  width: calc(100% - 100px);        /* otomatis sesuai konten jika lebih besar */
+  max-width: 100%;           /* biar gak overflow layar */
+  margin: 50px;
+  padding: 10px;
+  height: max-content;
+  background: #dddddd;
+  border-radius: 20px;
+}
+
+.not-found {
+  padding: 10px;
+  color: #555;
+  font-style: italic;
+  text-align: center;
+}
+
+.tambah-event {
+    position: relative;
+    bottom: 25px;
+    left: calc(100% - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+    background-color: #0000ff;
+
+    border: none;
+    border-radius: 1000px; /* Lebih tepat untuk tombol bulat */
+    cursor: pointer;
+
+    overflow: hidden;
+    transition: width 0.5s ease;
+}
+
+.pop-up {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Pusatkan pop-up */
+    z-index: 1000;
+    width: 300px;
+    max-width: 90%;
+    height: 400px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    padding: 20px;
+    display: none; /* atau block, tergantung pemicu */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    display: none;
+}
+
+.popup-buttons {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#popup {
+    width: 350px;
+    display: none;
+}
+
+#popup.show {
+  display: flex; /* atau block jika kamu tidak pakai flex layout */
+}
+
+#tutup {
+    background-color: #ff0034;
+    border-radius: 1000px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 5px 10px;
+}
+
+#buka {
+    background-color: #0000ff;
+    border-radius: 1000px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 5px 10px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin: 10px 0px 10px 0px;
+}
+
+textarea {
+    resize: none;
+    min-height: 100px;
+    width: 100%;
+}
+
+.input-field input {
+    width: 100%;
+
+}
+
+.logout-button {
+    width: 50px;
+    height: 50px;
+    background-color: #ff0034;
+    border-radius: 1000px;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;  /* posisikan absolut */
+    top: 77px;           /* jarak dari atas */
+    right: 20px;         /* jarak dari kanan */       /* agar di atas elemen lain */
+}
+
+table {
+    border: none;
+    border-collapse: separate;  /* Important for border-radius */
+    border-spacing: 0;          /* Removes space between cells */
+    width: 100%;
+    border-radius: 10px;        /* Apply radius to entire table */
+    overflow: hidden;           /* Ensures corners clip correctly */
+}
+
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: none;               /* Ensure no cell borders */
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Optional: extra-rounded effect on specific cells */
+th:first-child {
+    border-top-left-radius: 10px;
+}
+
+th:last-child {
+    border-top-right-radius: 10px;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+#tutup-tambah, #tutup-edit {
+    padding: 10px 20px;
+    background-color: #ff0034;
+    border-radius: 1000px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    color: white;
+}
+
+input, textarea {
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+input:focus, textarea:focus {
+    animation: input-texarea 1s linear infinite ;
+}
+
+
+
+.chatpanel li {
+    padding: 5px 10px;
+}
+
+.chatpanel li:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.chatpanel li:first-child {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.chatpanel li:last-child {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.chatpanel li a {
+    text-decoration: none;
+    color: black;
+    position: relative;
+    transition: all 500ms ease;
+}
+
+.chatpanel li a::before {
+    content: 'Chat dengan ';
+    font-size: 0px;
+    transition: all 500ms ease;
+}
+
+.chatpanel li a:hover::before {
+    font-size: 16px;
+}
+
+.chatpanel li i {
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid black;
+    overflow: hidden;
+    font-size: 16px;
+    color: #777;
+    position: relative;
+}
+
+.indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+
+@keyframes input-texarea {
+    0%{
+        color: black;
+    }50%{
+        color: white;
+    }100%{
+        color: black;
+    }
+}
+

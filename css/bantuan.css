@@ -1,0 +1,66 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.container {
+    font-size: 30px;
+    border-radius: 10px;
+    padding: 50px 100px;
+    background-color: #ddd;
+    gap: 50px;
+    display: inline-block;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+}
+.button {
+    gap: 30px;
+}
+a {
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+
+
+.laporan, .tanya {
+    background-color: #fff;
+    position: relative;
+    color: black;
+    transition: all 500ms ease;
+}
+
+
+
+.laporan::before {
+    content: 'Laporkan';
+    font-size: 0px;
+    transition: all 500ms ease;
+    color: white;
+}
+.tanya::before {
+    content: 'Tanya';
+    font-size: 0px;
+    transition: all 500ms ease;
+    color: white;
+}
+
+
+
+.laporan:hover::before, .tanya:hover::before{
+    font-size: 30px;
+}
+
+
+
+.laporan:hover{
+    background-color: #bd0f0f;
+    color: white;
+}
+.tanya:hover {
+    background-color: #0f6cbd;
+    color: white;
+}
